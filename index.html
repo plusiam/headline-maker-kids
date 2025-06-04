@@ -259,17 +259,19 @@
             border-color: var(--secondary-color) !important;
         }
         
+        /* 🔧 수정: 한 줄 요약 입력 필드 가독성 개선 */
         .headline-input {
-            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%) !important;
             color: white !important;
             border-color: var(--primary-color) !important;
             font-weight: bold;
             text-align: center;
             font-size: 1.3em !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
         .headline-input::placeholder {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
         }
         
         /* 동적 필드 관련 스타일 */
@@ -704,13 +706,13 @@
         </main>
     </div>
 
-    <!-- 라이브러리 로드 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- 🔧 수정: 최신 안정 라이브러리 CDN으로 업데이트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        // 전역 변수 및 설정
-        let isFormValid = false;
+        // 🔧 수정: 전역 변수 및 설정 (전역 접근 가능하도록 수정)
+        window.isFormValid = false;
         let keyIdeaCounter = 2; // 이미 1, 2가 있으므로 3부터 시작
         const MAX_KEY_IDEAS = 8; // 초등학생용은 8개로 제한
         
@@ -908,16 +910,19 @@
             }
         }
 
-        // 폼 유효성 업데이트
+        // 🔧 수정: 폼 유효성 업데이트 (전역 변수 동기화)
         function updateFormValidity() {
             const staticRequiredFields = [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
-            isFormValid = staticRequiredFields.every(field => field.value.trim().length > 0);
+            const isValid = staticRequiredFields.every(field => field.value.trim().length > 0);
+            
+            // 전역 변수 업데이트
+            window.isFormValid = isValid;
             
             // 버튼 상태 업데이트
-            elements.saveImageBtn.disabled = !isFormValid;
-            elements.savePdfBtn.disabled = !isFormValid;
+            elements.saveImageBtn.disabled = !isValid;
+            elements.savePdfBtn.disabled = !isValid;
             
-            if (!isFormValid) {
+            if (!isValid) {
                 elements.saveImageBtn.style.opacity = '0.6';
                 elements.savePdfBtn.style.opacity = '0.6';
             } else {
@@ -931,7 +936,7 @@
             // Ctrl+S로 저장
             if (e.ctrlKey && e.key === 's') {
                 e.preventDefault();
-                if (isFormValid) {
+                if (window.isFormValid) {
                     saveAsPDF();
                 } else {
                     announceToScreenReader('먼저 모든 빨간 별표 항목을 써주세요!');
@@ -1002,7 +1007,7 @@
 
         // 이미지로 저장
         async function saveAsImage() {
-            if (!isFormValid) {
+            if (!window.isFormValid) {
                 announceToScreenReader('빨간 별표가 있는 항목들을 모두 써주세요!', 'assertive');
                 return;
             }
@@ -1043,7 +1048,7 @@
 
         // PDF로 저장
         async function saveAsPDF() {
-            if (!isFormValid) {
+            if (!window.isFormValid) {
                 announceToScreenReader('빨간 별표가 있는 항목들을 모두 써주세요!', 'assertive');
                 return;
             }
@@ -1192,20 +1197,21 @@
             }
         }
 
-        // 출력용 콘텐츠 생성
+        // 🔧 수정: 출력용 콘텐츠 생성 (배경색 문제 해결)
         function createPrintableContent() {
             const printDiv = document.createElement('div');
             printDiv.style.cssText = `
                 width: 800px;
                 padding: 40px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: white;
                 font-family: 'Comic Sans MS', 'Malgun Gothic', '맑은 고딕', cursive, sans-serif;
-                color: #fff;
+                color: #333;
                 line-height: 1.6;
                 position: absolute;
                 left: -9999px;
                 top: 0;
                 border-radius: 20px;
+                border: 3px solid #667eea;
             `;
             
             // 모든 핵심 아이디어 수집
@@ -1223,46 +1229,50 @@
             
             const keyIdeasHtml = allKeyIdeas.map((idea, index) => {
                 const label = ideaLabels[index] || `${index + 1}.`;
-                return `<p style="margin: 0 0 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 10px;"><strong>${label}</strong><br>${idea.value || '(입력되지 않음)'}</p>`;
+                return `<p style="margin: 0 0 10px 0; padding: 10px; background: #f8f9fa; border-radius: 10px; border: 2px solid #e9ecef;"><strong style="color: #495057;">${label}</strong><br><span style="color: #212529;">${idea.value || '(입력되지 않음)'}</span></p>`;
             }).join('');
             
             printDiv.innerHTML = `
-                <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid rgba(255,255,255,0.3);">
-                    <h1 style="margin: 0; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">✨ 나만의 한 줄 요약 ✨</h1>
-                    <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">📅 ${getCurrentDateString()}</p>
+                <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #667eea;">
+                    <h1 style="margin: 0; font-size: 28px; color: #667eea; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">✨ 나만의 한 줄 요약 ✨</h1>
+                    <p style="margin: 10px 0 0 0; font-size: 16px; color: #666;">📅 ${getCurrentDateString()}</p>
                 </div>
                 
-                <div style="margin-bottom: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                    <h3 style="color: #fff; margin-bottom: 10px; font-size: 18px;">📚 오늘 배운 것</h3>
-                    <div style="padding: 15px; background: rgba(255,255,255,0.2); border-radius: 10px; font-size: 16px; font-weight: bold;">
+                <div style="margin-bottom: 25px; padding: 20px; background: #e8f5e8; border-radius: 15px; border: 2px solid #4ecdc4;">
+                    <h3 style="color: #2d5a2d; margin-bottom: 10px; font-size: 18px;">📚 오늘 배운 것</h3>
+                    <div style="padding: 15px; background: white; border-radius: 10px; font-size: 16px; font-weight: bold; color: #333; border: 2px solid #4ecdc4;">
                         ${elements.topicInput.value || '(입력되지 않음)'}
                     </div>
                 </div>
                 
-                <div style="margin-bottom: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 18px;">🔍 1단계: 중요한 것들</h3>
+                <div style="margin-bottom: 25px; padding: 20px; background: #f1f8e9; border-radius: 15px; border: 2px solid #4ecdc4;">
+                    <h3 style="color: #2d5a2d; margin-bottom: 15px; font-size: 18px;">🔍 1단계: 중요한 것들</h3>
                     <div>
                         ${keyIdeasHtml}
                     </div>
                 </div>
                 
-                <div style="margin-bottom: 25px; padding: 25px; background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); border-radius: 15px; text-align: center;">
-                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 18px;">✍️ 2단계: 나만의 한 줄 요약</h3>
-                    <div style="padding: 20px; background: rgba(255,255,255,0.9); color: #333; border-radius: 10px; font-size: 20px; font-weight: bold; text-shadow: none;">
+                <div style="margin-bottom: 25px; padding: 25px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 15px; text-align: center;">
+                    <h3 style="color: #856404; margin-bottom: 15px; font-size: 18px;">✍️ 2단계: 나만의 한 줄 요약</h3>
+                    <div style="padding: 20px; background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%); color: white; border-radius: 10px; font-size: 20px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
                         "${elements.myHeadline.value || '(입력되지 않음)'}"
                     </div>
                 </div>
                 
-                <div style="padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 18px;">💭 3단계: 내 생각 나누기</h3>
-                    <div style="margin-bottom: 15px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                        <p style="margin: 0 0 10px 0; font-weight: bold;">🤔 선택한 이유:</p>
-                        <p style="margin: 0;">${elements.reason.value || '(입력되지 않음)'}</p>
+                <div style="padding: 20px; background: #f8d7da; border: 2px solid #dc3545; border-radius: 15px;">
+                    <h3 style="color: #721c24; margin-bottom: 15px; font-size: 18px;">💭 3단계: 내 생각 나누기</h3>
+                    <div style="margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px; border: 1px solid #dc3545;">
+                        <p style="margin: 0 0 10px 0; font-weight: bold; color: #721c24;">🤔 선택한 이유:</p>
+                        <p style="margin: 0; color: #333;">${elements.reason.value || '(입력되지 않음)'}</p>
                     </div>
-                    <div style="padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                        <p style="margin: 0 0 10px 0; font-weight: bold;">👫 친구들이 알게 되었으면 하는 것:</p>
-                        <p style="margin: 0;">${elements.audienceMessage.value || '(입력되지 않음)'}</p>
+                    <div style="padding: 15px; background: white; border-radius: 10px; border: 1px solid #dc3545;">
+                        <p style="margin: 0 0 10px 0; font-weight: bold; color: #721c24;">👫 친구들이 알게 되었으면 하는 것:</p>
+                        <p style="margin: 0; color: #333;">${elements.audienceMessage.value || '(입력되지 않음)'}</p>
                     </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #667eea;">
+                    <p style="margin: 0; font-size: 14px; color: #667eea; font-weight: bold;">🌟 멋진 한 줄 요약을 완성했어요! 🌟</p>
                 </div>
             `;
             
@@ -1393,7 +1403,7 @@
                 <div style="margin-bottom: 15px; padding: 15px; background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); border-radius: 10px; border: 2px solid #ff6b6b;">
                     <h3 style="color: #b33939; margin: 0 0 10px 0; font-size: 16px;">✍️ 2단계: 멋진 한 줄 요약 만들기</h3>
                     <label style="font-weight: bold; color: #b33939; font-size: 13px; display: block; margin-bottom: 6px;">🎤 친구들에게 알려주고 싶은 한 문장:</label>
-                    <div style="border: 2px solid #ff6b6b; border-radius: 10px; height: 45px; background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); text-align: center; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;">
+                    <div style="border: 2px solid #ff6b6b; border-radius: 10px; height: 45px; background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%); text-align: center; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;">
                         &nbsp;
                     </div>
                     
