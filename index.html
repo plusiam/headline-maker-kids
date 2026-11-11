@@ -3,1486 +3,828 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="초등학생을 위한 쉽고 재미있는 한 줄 요약 학습지입니다. 오늘 배운 것을 친구들에게 알려주는 멋진 문장을 만들어보세요!">
-    <title>✨ 나만의 한 줄 요약 만들기 - 초등학생용</title>
+    <meta name="description" content="오늘 배운 것의 핵심을 신문 헤드라인처럼 한 문장으로 정리하는 초등 사고 루틴 학습지입니다.">
+    <title>나만의 한 줄 요약 만들기 | 헤드라인</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        
         :root {
-            --primary-color: #ff6b6b;
-            --primary-dark: #ff5252;
-            --secondary-color: #4ecdc4;
-            --success-color: #4caf50;
-            --warning-color: #ffc107;
-            --danger-color: #f44336;
-            --purple-color: #9c27b0;
-            --orange-color: #ff9800;
-            --light-bg: #fff8f0;
-            --border-color: #ffcccb;
-            --text-color: #333;
-            --text-muted: #666;
-            --focus-color: rgba(255, 107, 107, 0.3);
+            --bg: #f7f5f1;
+            --surface: #ffffff;
+            --ink: #1f2433;
+            --muted: #5d6477;
+            --line: #e7e2da;
+            --field-line: #c9cdd6;
+            --soft: #f1eee8;
+            --brand: #5b4bd6;
+            --brand-ink: #3f31b0;
+            --brand-soft: #ece9fb;
+            --error: #c0392b;
+            --error-soft: #fdf0ee;
+            --radius: 18px;
+            --shadow: 0 1px 2px rgba(31,36,51,.06), 0 6px 20px rgba(31,36,51,.06);
+            --font: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
         }
-        
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'Comic Sans MS', 'Malgun Gothic', '맑은 고딕', cursive, sans-serif;
-            line-height: 1.7;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--text-color);
-            min-height: 100vh;
-        }
-        
-        /* 배경 애니메이션 */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="30" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: twinkle 3s ease-in-out infinite alternate;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.8; }
-        }
-        
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: var(--primary-color);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 20px;
-            z-index: 1001;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        
-        .skip-link:focus {
-            top: 6px;
-        }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,107,107,0.1), transparent);
-            animation: shine 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes shine {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        header h1 {
-            font-size: 2.2em;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--purple-color));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbow 3s ease-in-out infinite;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        @keyframes rainbow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            font-size: 1.2em;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-        
-        .fun-instruction {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 3px solid var(--orange-color);
-            text-align: center;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #d84315;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
-        }
-        
-        .step-section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 3px solid;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .step-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--purple-color));
-        }
-        
-        .step1 { 
-            border-color: var(--secondary-color);
-            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
-        }
-        .step2 { 
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
-        }
-        .step3 { 
-            border-color: var(--purple-color);
-            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
-            color: white;
-        }
-        
-        .step-title {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .step1 .step-title { color: #2d5a2d; }
-        .step2 .step-title { color: #b33939; }
-        .step3 .step-title { color: white; }
-        
-        .step-icon {
-            font-size: 1.8em;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            font-size: 1.1em;
-            color: inherit;
-        }
-        
-        .input-group input[type="text"],
-        .input-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 3px solid var(--border-color);
-            border-radius: 15px;
-            font-size: 1.1em;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .input-group input:focus,
-        .input-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px var(--focus-color);
-            background: #fffef7;
-            transform: scale(1.02);
-        }
-        
-        .input-group textarea {
-            resize: vertical;
-            min-height: 100px;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
             line-height: 1.6;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .topic-input {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-color: var(--secondary-color) !important;
+
+        .skip-link {
+            position: absolute; left: 12px; top: -48px;
+            background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px;
+            text-decoration: none; z-index: 100;
         }
-        
-        /* 🔧 수정: 한 줄 요약 입력 필드 가독성 개선 */
+        .skip-link:focus { top: 12px; }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+
+        .container { max-width: 760px; margin: 0 auto; padding: 36px 20px 64px; }
+
+        /* 머리말 */
+        header { margin-bottom: 22px; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 14px; font-weight: 600; color: var(--brand-ink);
+            background: var(--brand-soft); padding: 4px 12px; border-radius: 999px;
+        }
+        h1 { font-size: 30px; line-height: 1.3; font-weight: 800; margin: 12px 0 6px; letter-spacing: -0.01em; }
+        .subtitle { margin: 0; color: var(--muted); font-size: 17px; }
+
+        .guide {
+            background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--brand);
+            border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 16px; color: var(--ink);
+        }
+        .guide strong { color: var(--brand-ink); }
+        .guide .req-note { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); }
+
+        /* 카드 */
+        .card {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            box-shadow: var(--shadow); padding: 24px; margin-bottom: 20px;
+        }
+        .step-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 21px; font-weight: 700; margin: 0 0 18px;
+        }
+        .step-num {
+            flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+            background: var(--brand); color: #fff; font-size: 17px; font-weight: 700;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+
+        /* 입력 */
+        .input-group { position: relative; margin-bottom: 18px; }
+        .input-group:last-child { margin-bottom: 0; }
+        label { display: block; font-size: 17px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+        .req {
+            display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 6px;
+            font-size: 12px; font-weight: 700; color: var(--brand-ink); background: var(--brand-soft);
+            vertical-align: 2px;
+        }
+        input[type="text"], textarea {
+            width: 100%; font-family: inherit; font-size: 18px; color: var(--ink);
+            background: #fff; border: 1.5px solid var(--field-line); border-radius: 12px;
+            padding: 12px 14px; line-height: 1.5; transition: border-color .15s, box-shadow .15s;
+        }
+        textarea { resize: vertical; min-height: 96px; }
+        input::placeholder, textarea::placeholder { color: #8a90a0; }
+        input[type="text"]:focus, textarea:focus {
+            outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(91,75,214,.22);
+        }
+        [aria-invalid="true"] { border-color: var(--error) !important; background: var(--error-soft) !important; }
+        .field-error { display: none; margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--error); }
+        [aria-invalid="true"] ~ .field-error { display: block; }
+
+        /* 핵심 한 줄 칸 강조 */
         .headline-input {
-            background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%) !important;
-            color: white !important;
-            border-color: var(--primary-color) !important;
-            font-weight: bold;
-            text-align: center;
-            font-size: 1.3em !important;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-size: 22px !important; font-weight: 700; min-height: 0 !important; resize: none !important;
+            border: 2px solid var(--brand) !important; background: #fdfcff !important; overflow: hidden;
         }
-        
-        .headline-input::placeholder {
-            color: rgba(255,255,255,0.9);
-        }
-        
-        /* 동적 필드 관련 스타일 */
-        .key-ideas-container {
-            position: relative;
-        }
-        
-        .dynamic-input-group {
-            position: relative;
-            margin-bottom: 15px;
-            padding-right: 60px;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
+
+        /* 추가 칸 */
+        .dynamic-input-group input { padding-right: 56px; }
         .remove-field-btn {
-            position: absolute;
-            right: 10px;
-            top: 45px;
-            background: var(--danger-color);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            position: absolute; right: 6px; bottom: 6px; width: 44px; height: 40px;
+            border: none; border-radius: 10px; background: transparent; color: var(--muted);
+            font-size: 22px; cursor: pointer;
         }
-        
-        .remove-field-btn:hover {
-            background: #d32f2f;
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
-        }
-        
+        .remove-field-btn:hover { background: var(--soft); color: var(--ink); }
+        .field-removing { opacity: 0; transition: opacity .25s; }
+
         .add-field-btn {
-            background: linear-gradient(135deg, var(--success-color) 0%, #66bb6a 100%);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 15px 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;
+            min-height: 44px; padding: 0 16px; border-radius: 10px; cursor: pointer;
+            font-family: inherit; font-size: 16px; font-weight: 600;
+            color: var(--brand-ink); background: #fff; border: 1.5px dashed #b9b2ee;
         }
-        
-        .add-field-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
-        }
-        
-        .add-field-btn:disabled {
-            background: var(--text-muted);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .field-removing {
-            animation: slideOut 0.5s ease-in forwards;
-        }
-        
-        @keyframes slideOut {
-            from {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                max-height: 100px;
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.9);
-                max-height: 0;
-                margin-bottom: 0;
-                padding-bottom: 0;
-            }
-        }
-        
+        .add-field-btn:hover:not(:disabled) { background: var(--brand-soft); }
+        .add-field-btn:disabled { color: var(--muted); border-color: var(--line); cursor: default; }
+
         .tip-box {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 15px 0;
-            font-size: 1.05em;
-            box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
-            border: 3px solid #0984e3;
+            margin-top: 16px; background: var(--soft); border-radius: 12px; padding: 14px 16px;
+            font-size: 15px; color: var(--ink);
         }
-        
-        .button-group {
-            margin-top: 30px;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-        
+        .tip-box strong { display: block; margin-bottom: 4px; }
+        .tip-box ul { margin: 0; padding-left: 20px; }
+
+        /* 버튼 */
+        .button-group { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 28px 0 8px; }
         .action-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            padding: 18px 25px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            min-width: 180px;
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-            position: relative;
-            overflow: hidden;
+            min-height: 52px; padding: 0 24px; border-radius: 12px; cursor: pointer;
+            font-family: inherit; font-size: 17px; font-weight: 700;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            border: 1.5px solid var(--brand); transition: background .15s, transform .05s;
         }
-        
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+        .action-btn:active { transform: translateY(1px); }
+        .action-btn:focus-visible, .add-field-btn:focus-visible, .remove-field-btn:focus-visible,
+        .dialog-btn:focus-visible, summary:focus-visible {
+            outline: 3px solid rgba(91,75,214,.45); outline-offset: 2px;
         }
-        
-        .action-btn:hover::before {
-            left: 100%;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
-        }
-        
-        .reset-btn {
-            background: linear-gradient(135deg, var(--text-muted) 0%, #757575 100%);
-        }
-        
-        .reset-btn:hover {
-            box-shadow: 0 8px 25px rgba(117, 117, 117, 0.6);
-        }
-        
+        .btn-primary { background: var(--brand); color: #fff; }
+        .btn-primary:hover { background: var(--brand-ink); border-color: var(--brand-ink); }
+        .btn-outline { background: #fff; color: var(--brand-ink); }
+        .btn-outline:hover { background: var(--brand-soft); }
+        .btn-ghost { background: transparent; color: var(--muted); border-color: transparent; }
+        .btn-ghost:hover { background: var(--soft); color: var(--ink); }
+        .btn-icon { width: 20px; height: 20px; flex: 0 0 auto; }
+
+        /* 교사용 */
         .teacher-zone {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
-            border-radius: 20px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.4);
+            margin-top: 36px; background: transparent; border: 1px solid var(--line); border-radius: 14px;
+            padding: 0 18px;
         }
-        
-        .teacher-zone h2 {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            margin-top: 0;
+        .teacher-zone summary {
+            cursor: pointer; list-style: none; padding: 14px 0; font-size: 15px; font-weight: 600; color: var(--muted);
         }
-        
+        .teacher-zone summary::-webkit-details-marker { display: none; }
+        .teacher-zone summary::before { content: "▸ "; }
+        .teacher-zone[open] summary::before { content: "▾ "; }
+        .teacher-zone .teacher-body { padding: 0 0 18px; font-size: 15px; color: var(--muted); }
+        .teacher-zone .action-btn { min-height: 44px; font-size: 15px; margin-top: 8px; }
+
+        /* 작성자 창 */
+        dialog {
+            width: min(480px, calc(100vw - 32px)); border: none; border-radius: 20px; padding: 0;
+            color: var(--ink); box-shadow: 0 20px 60px rgba(31,36,51,.25);
+        }
+        dialog::backdrop { background: rgba(31,36,51,.45); }
+        .dialog-inner { padding: 24px; }
+        .dialog-inner h2 { font-size: 21px; margin: 0 0 4px; }
+        .dialog-desc { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+        .author-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+        .author-grid label, .author-name label { font-size: 15px; margin-bottom: 6px; }
+        .author-grid input, .author-name input { font-size: 18px; padding: 10px 12px; }
+        .author-name { margin-bottom: 14px; }
+        .author-preview {
+            background: var(--soft); border-radius: 10px; padding: 10px 14px; font-size: 15px; color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .author-preview b { color: var(--ink); }
+        .privacy-note { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+        .dialog-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .dialog-btn {
+            min-height: 48px; padding: 0 20px; border-radius: 12px; font-family: inherit; font-size: 16px;
+            font-weight: 700; cursor: pointer; border: 1.5px solid var(--brand);
+        }
+
+        /* 안내 메시지 */
+        .toast {
+            position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+            background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px;
+            font-size: 15px; max-width: calc(100vw - 32px); box-shadow: 0 10px 30px rgba(0,0,0,.2);
+            opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 50;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.error { background: var(--error); }
+
+        /* 로딩 */
         .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; inset: 0; background: rgba(247,245,241,.85);
+            z-index: 60; align-items: center; justify-content: center;
         }
-        
-        .loading-content {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            max-width: 300px;
-        }
-        
+        .loading-content { text-align: center; font-size: 16px; color: var(--ink); }
         .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            width: 40px; height: 40px; margin: 0 auto 12px; border-radius: 50%;
+            border: 4px solid var(--brand-soft); border-top-color: var(--brand); animation: spin 0.9s linear infinite;
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-            
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            .step-title {
-                font-size: 1.3em;
-            }
-            
-            .action-btn {
-                min-width: 100%;
-                margin: 8px 0;
-            }
-            
-            .dynamic-input-group {
-                padding-right: 50px;
-            }
-            
-            .remove-field-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
-                right: 8px;
-                top: 40px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                margin: 5px;
-                padding: 15px;
-            }
-            
-            header h1 {
-                font-size: 1.5em;
-            }
-            
-            .step-title {
-                font-size: 1.1em;
-            }
-            
-            .input-group input,
-            .input-group textarea {
-                padding: 12px;
-                font-size: 16px; /* iOS zoom 방지 */
-            }
-        }
-        
-        /* 접근성 */
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
         }
-        
-        @media (prefers-contrast: high) {
-            .step-section,
-            .input-group input,
-            .input-group textarea,
-            .action-btn {
-                border-width: 4px;
-            }
+
+        @media (max-width: 560px) {
+            .container { padding: 24px 14px 48px; }
+            h1 { font-size: 25px; }
+            .card { padding: 18px; }
+            .step-title { font-size: 19px; }
+            .action-btn { flex: 1 1 100%; }
+            .author-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
-        /* 프린트 스타일 */
+
         @media print {
-            body {
-                background: white;
-                color: black;
-            }
-            
-            .button-group,
-            .teacher-zone,
-            .add-field-btn,
-            .remove-field-btn {
-                display: none;
-            }
-            
-            .container {
-                box-shadow: none;
-                margin: 0;
-                padding: 0;
-            }
-            
-            .step-section {
-                border: 2px solid #000;
-                background: white !important;
-                color: black !important;
-            }
+            body { background: #fff; }
+            .button-group, .teacher-zone, .add-field-btn, .remove-field-btn, .toast { display: none !important; }
+            .card { box-shadow: none; break-inside: avoid; }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">본문으로 바로가기</a>
-    
-    <div class="loading" id="loadingIndicator" role="status" aria-live="polite">
+
+    <div class="loading" id="loadingIndicator" role="status" aria-live="polite" aria-hidden="true">
         <div class="loading-content">
             <div class="loading-spinner"></div>
-            <p><strong>멋진 요약을 만들고 있어요!</strong><br>조금만 기다려주세요 😊</p>
+            <p><strong>만들고 있어요</strong><br>조금만 기다려 주세요</p>
         </div>
     </div>
 
     <div class="container">
         <header>
-            <h1 id="main-title">✨ 나만의 한 줄 요약 만들기</h1>
-            <p class="subtitle">오늘 배운 것을 친구들에게 알려주는 멋진 문장을 만들어보자! 🌟</p>
+            <span class="eyebrow">종합·체계화 · Headlines</span>
+            <h1 id="main-title">나만의 한 줄 요약 만들기</h1>
+            <p class="subtitle">오늘 배운 것을 친구들에게 알려주는 멋진 문장을 만들어 보자!</p>
         </header>
 
         <main id="main-content">
-            <div class="fun-instruction">
-                🎯 <strong>이렇게 해보자!</strong><br>
-                오늘 배운 것 중에서 중요하고 재미있었던 것들을 찾아서,<br>
-                친구들에게 꼭 알려주고 싶은 멋진 한 문장을 만들어보자! 🚀
+            <div class="guide">
+                <strong>이렇게 해 보자!</strong>
+                오늘 배운 것 중에서 중요하고 재미있었던 것들을 찾아서, 친구들에게 꼭 알려 주고 싶은 멋진 한 문장을 만들어 보자.
+                <span class="req-note"><span class="req">필수</span> 표시가 있는 칸은 꼭 써야 저장할 수 있어요.</span>
             </div>
 
-            <div class="input-group">
-                <label for="topic">📚 오늘 무엇을 배웠나요? <span style="color: red;">(꼭 써주세요)</span></label>
-                <input type="text" id="topic" class="topic-input" placeholder="예: 나비의 한살이, 우리 동네 가게들, 덧셈과 뺄셈" aria-describedby="topic-help" required>
-                <div id="topic-help" class="sr-only">오늘 배운 주제를 써주세요</div>
-            </div>
+            <section class="card" aria-labelledby="topic-label">
+                <div class="input-group">
+                    <label for="topic" id="topic-label">오늘 무엇을 배웠나요? <span class="req">필수</span></label>
+                    <input type="text" id="topic" class="topic-input" placeholder="예: 나비의 한살이, 우리 동네 가게들, 덧셈과 뺄셈" required>
+                    <div class="field-error">이 칸을 써 주세요.</div>
+                </div>
+            </section>
 
-            <section class="step-section step1" aria-labelledby="step1-title">
-                <h2 class="step-title" id="step1-title">
-                    <span class="step-icon">🔍</span>
-                    1단계: 중요한 것들 찾아보기
-                </h2>
-                
+            <section class="card step-section step1" aria-labelledby="step1-title">
+                <h2 class="step-title" id="step1-title"><span class="step-num" aria-hidden="true">1</span>중요한 것들 찾아보기</h2>
+
                 <div id="keyIdeasContainer" class="key-ideas-container" role="group" aria-labelledby="step1-title">
                     <div class="input-group">
-                        <label for="keyIdea1">🌟 가장 중요하게 배운 것: <span style="color: red;">(꼭 써주세요)</span></label>
-                        <input type="text" id="keyIdea1" placeholder="오늘 배운 것 중에서 가장 중요한 것" aria-describedby="key1-help" required>
-                        <div id="key1-help" class="sr-only">첫 번째로 중요한 것을 써주세요</div>
+                        <label for="keyIdea1">가장 중요하게 배운 것 <span class="req">필수</span></label>
+                        <input type="text" id="keyIdea1" placeholder="오늘 배운 것 중에서 가장 중요한 것" required>
+                        <div class="field-error">이 칸을 써 주세요.</div>
                     </div>
-                    
                     <div class="input-group">
-                        <label for="keyIdea2">✨ 가장 신기했던 것: <span style="color: red;">(꼭 써주세요)</span></label>
-                        <input type="text" id="keyIdea2" placeholder="오늘 배운 것 중에서 가장 신기했던 것" aria-describedby="key2-help" required>
-                        <div id="key2-help" class="sr-only">두 번째로 중요한 것을 써주세요</div>
+                        <label for="keyIdea2">가장 신기했던 것 <span class="req">필수</span></label>
+                        <input type="text" id="keyIdea2" placeholder="오늘 배운 것 중에서 가장 신기했던 것" required>
+                        <div class="field-error">이 칸을 써 주세요.</div>
                     </div>
                 </div>
-                
-                <button type="button" class="add-field-btn" id="addKeyIdeaBtn" aria-describedby="add-field-help">
-                    <span>➕</span> 더 추가하기!
-                </button>
-                <div id="add-field-help" class="sr-only">더 중요한 것이 있다면 추가해보세요. 최대 8개까지 가능해요.</div>
+
+                <button type="button" class="add-field-btn" id="addKeyIdeaBtn">＋ 더 추가하기</button>
             </section>
 
-            <section class="step-section step2" aria-labelledby="step2-title">
-                <h2 class="step-title" id="step2-title">
-                    <span class="step-icon">✍️</span>
-                    2단계: 멋진 한 줄 요약 만들기
-                </h2>
+            <section class="card step-section step2" aria-labelledby="step2-title">
+                <h2 class="step-title" id="step2-title"><span class="step-num" aria-hidden="true">2</span>멋진 한 줄 요약 만들기</h2>
                 <div class="input-group">
-                    <label for="myHeadline">🎤 친구들에게 알려주고 싶은 한 문장: <span style="color: red;">(꼭 써주세요)</span></label>
-                    <input type="text" id="myHeadline" class="headline-input" placeholder="오늘 배운 것을 한 문장으로 요약해보자!" aria-describedby="headline-help" required>
-                    <div id="headline-help" class="sr-only">오늘 배운 것을 한 문장으로 요약해보세요</div>
+                    <label for="myHeadline">친구들에게 알려 주고 싶은 한 문장 <span class="req">필수</span></label>
+                    <textarea id="myHeadline" class="headline-input" rows="1" placeholder="오늘 배운 것을 한 문장으로 요약해 보자!" required></textarea>
+                    <div class="field-error">이 칸을 써 주세요.</div>
                 </div>
                 <div class="tip-box">
-                    <strong>💡 한 줄 요약 만드는 팁!</strong><br>
-                    ✓ 짧고 쉽게 써보자<br>
-                    ✓ 가장 중요한 것을 넣자<br>
-                    ✓ 친구들이 듣고 "와~ 신기하다!" 할 수 있게 써보자
+                    <strong>한 줄 요약 만드는 팁</strong>
+                    <ul>
+                        <li>짧고 쉽게 써 보자</li>
+                        <li>가장 중요한 것을 넣자</li>
+                        <li>친구들이 듣고 "와~ 신기하다!" 할 수 있게 써 보자</li>
+                    </ul>
                 </div>
             </section>
 
-            <section class="step-section step3" aria-labelledby="step3-title">
-                <h2 class="step-title" id="step3-title">
-                    <span class="step-icon">💭</span>
-                    3단계: 왜 이렇게 썼는지 말해보기
-                </h2>
+            <section class="card step-section step3" aria-labelledby="step3-title">
+                <h2 class="step-title" id="step3-title"><span class="step-num" aria-hidden="true">3</span>왜 이렇게 썼는지 말해 보기</h2>
                 <div class="input-group">
-                    <label for="reason">🤔 왜 이 문장을 선택했나요? <span style="color: red;">(꼭 써주세요)</span></label>
-                    <textarea id="reason" rows="4" placeholder="이 한 줄 요약이 좋은 이유를 써보세요. 예: 가장 신기했고, 친구들도 알면 재미있을 것 같아서..." aria-describedby="reason-help" required></textarea>
-                    <div id="reason-help" class="sr-only">왜 이 문장을 선택했는지 써보세요</div>
+                    <label for="reason">왜 이 문장을 선택했나요? <span class="req">필수</span></label>
+                    <textarea id="reason" rows="3" placeholder="이 한 줄 요약이 좋은 이유를 써 보세요. 예: 가장 신기했고, 친구들도 알면 재미있을 것 같아서..." required></textarea>
+                    <div class="field-error">이 칸을 써 주세요.</div>
                 </div>
-                
                 <div class="input-group">
-                    <label for="audienceMessage">👫 친구들이 무엇을 알게 되었으면 좋겠나요? <span style="color: red;">(꼭 써주세요)</span></label>
-                    <textarea id="audienceMessage" rows="4" placeholder="내 한 줄 요약을 듣고 친구들이 어떤 생각을 했으면 좋겠는지 써보세요..." aria-describedby="audience-help" required></textarea>
-                    <div id="audience-help" class="sr-only">친구들이 알게 되었으면 하는 것을 써보세요</div>
+                    <label for="audienceMessage">친구들이 무엇을 알게 되었으면 좋겠나요? <span class="req">필수</span></label>
+                    <textarea id="audienceMessage" rows="3" placeholder="내 한 줄 요약을 듣고 친구들이 어떤 생각을 했으면 좋겠는지 써 보세요..." required></textarea>
+                    <div class="field-error">이 칸을 써 주세요.</div>
                 </div>
             </section>
 
             <div class="button-group" role="group" aria-label="내 작품 저장하기">
-                <button id="saveImageBtn" type="button" class="action-btn" aria-describedby="save-image-help">
-                    📸 사진으로 저장하기
+                <button id="saveImageBtn" type="button" class="action-btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    이미지로 저장하기
                 </button>
-                <div id="save-image-help" class="sr-only">내가 만든 한 줄 요약을 사진으로 저장해요</div>
-                
-                <button id="savePdfBtn" type="button" class="action-btn" aria-describedby="save-pdf-help">
-                    📄 PDF로 저장하기
+                <button id="savePdfBtn" type="button" class="action-btn btn-outline">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>
+                    PDF로 저장하기
                 </button>
-                <div id="save-pdf-help" class="sr-only">내가 만든 한 줄 요약을 PDF 파일로 저장해요</div>
-                
-                <button id="resetBtn" type="button" class="action-btn reset-btn" aria-describedby="reset-help">
-                    🔄 다시 만들기
-                </button>
-                <div id="reset-help" class="sr-only">모든 내용을 지우고 새로 시작해요</div>
+                <button id="resetBtn" type="button" class="action-btn btn-ghost">다시 만들기</button>
             </div>
 
-            <section class="teacher-zone" role="region" aria-labelledby="teacher-title">
-                <h2 id="teacher-title">👩‍🏫 선생님을 위한 도구</h2>
-                <p>학생들에게 나누어줄 빈 학습지를 만들 수 있어요! 📋</p>
-                <button id="downloadBlankTemplateBtn" type="button" class="action-btn" aria-describedby="blank-template-help">
-                    📋 빈 학습지 다운로드
-                </button>
-                <div id="blank-template-help" class="sr-only">학생들에게 나누어줄 빈 학습지를 다운로드해요</div>
-            </section>
+            <details class="teacher-zone">
+                <summary>선생님용 · 빈 학습지 PDF</summary>
+                <div class="teacher-body">
+                    종이로 나누어 줄 빈 학습지(A4 한 장)를 내려받아요.<br>
+                    <button id="downloadBlankTemplateBtn" type="button" class="action-btn btn-outline">빈 학습지 다운로드</button>
+                </div>
+            </details>
         </main>
     </div>
 
-    <!-- 🔧 수정: 최신 안정 라이브러리 CDN으로 업데이트 -->
+    <!-- 저장할 때 뜨는 작성자 창 -->
+    <dialog id="authorDialog" aria-labelledby="authorDialogTitle">
+        <form method="dialog" class="dialog-inner" id="authorForm">
+            <h2 id="authorDialogTitle">누가 만들었나요?</h2>
+            <p class="dialog-desc">적은 내용이 저장되는 결과물 위쪽에 들어가요. 비워 두면 그 칸은 빠져요.</p>
+            <div class="author-grid">
+                <div><label for="authorGrade">학년</label><input type="text" id="authorGrade" inputmode="numeric" maxlength="2" autocomplete="off"></div>
+                <div><label for="authorClass">반</label><input type="text" id="authorClass" inputmode="numeric" maxlength="3" autocomplete="off"></div>
+                <div><label for="authorNumber">번호</label><input type="text" id="authorNumber" inputmode="numeric" maxlength="3" autocomplete="off"></div>
+            </div>
+            <div class="author-name"><label for="authorName">이름</label><input type="text" id="authorName" maxlength="20" autocomplete="off"></div>
+            <div class="author-preview" id="authorPreview" aria-live="polite"></div>
+            <p class="privacy-note">패들렛처럼 여럿이 보는 곳에 올릴 때는 선생님 안내에 따라 이름 대신 번호만 써도 돼요.</p>
+            <div class="dialog-actions">
+                <button type="button" class="dialog-btn btn-ghost" id="authorCancelBtn">취소</button>
+                <button type="submit" class="dialog-btn btn-primary" id="authorConfirmBtn">저장하기</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        // 🔧 수정: 전역 변수 및 설정 (전역 접근 가능하도록 수정)
-        window.isFormValid = false;
-        let keyIdeaCounter = 2; // 이미 1, 2가 있으므로 3부터 시작
-        const MAX_KEY_IDEAS = 8; // 초등학생용은 8개로 제한
-        
-        // DOM 요소 캐싱
+        let keyIdeaCounter = 2;
+        const MAX_KEY_IDEAS = 8;
+        const FONT = '"Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif';
+
+        const $ = (id) => document.getElementById(id);
         const elements = {
-            topicInput: document.getElementById('topic'),
-            keyIdea1: document.getElementById('keyIdea1'),
-            keyIdea2: document.getElementById('keyIdea2'),
-            keyIdeasContainer: document.getElementById('keyIdeasContainer'),
-            addKeyIdeaBtn: document.getElementById('addKeyIdeaBtn'),
-            myHeadline: document.getElementById('myHeadline'),
-            reason: document.getElementById('reason'),
-            audienceMessage: document.getElementById('audienceMessage'),
-            saveImageBtn: document.getElementById('saveImageBtn'),
-            savePdfBtn: document.getElementById('savePdfBtn'),
-            resetBtn: document.getElementById('resetBtn'),
-            downloadBlankTemplateBtn: document.getElementById('downloadBlankTemplateBtn'),
-            loadingIndicator: document.getElementById('loadingIndicator')
+            topicInput: $('topic'),
+            keyIdea1: $('keyIdea1'),
+            keyIdea2: $('keyIdea2'),
+            keyIdeasContainer: $('keyIdeasContainer'),
+            addKeyIdeaBtn: $('addKeyIdeaBtn'),
+            myHeadline: $('myHeadline'),
+            reason: $('reason'),
+            audienceMessage: $('audienceMessage'),
+            saveImageBtn: $('saveImageBtn'),
+            savePdfBtn: $('savePdfBtn'),
+            resetBtn: $('resetBtn'),
+            downloadBlankTemplateBtn: $('downloadBlankTemplateBtn'),
+            loadingIndicator: $('loadingIndicator'),
+            dialog: $('authorDialog'),
+            authorForm: $('authorForm'),
+            authorGrade: $('authorGrade'),
+            authorClass: $('authorClass'),
+            authorNumber: $('authorNumber'),
+            authorName: $('authorName'),
+            authorPreview: $('authorPreview'),
+            authorConfirmBtn: $('authorConfirmBtn'),
+            authorCancelBtn: $('authorCancelBtn'),
+            toast: $('toast')
         };
 
-        // 초기화
+        const requiredFields = () => [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
+
+        // 추가 칸 이름 (기존 학습지와 같음)
+        const ideaLabels = [
+            '가장 중요하게 배운 것',
+            '가장 신기했던 것',
+            '또 다른 재미있었던 것',
+            '더 배우고 싶은 것',
+            '친구들에게 자랑하고 싶은 것',
+            '가장 기억에 남는 것',
+            '새롭게 알게 된 것',
+            '특별했던 것'
+        ];
+
         function init() {
-            setupEventListeners();
-            setupFormValidation();
-            setupDynamicFields();
-            setupAccessibility();
-            
-            // 초기 포커스 설정
-            elements.topicInput.focus();
-            updateAddButtonState();
-            
-            console.log('초등학생용 한 줄 요약 학습지 초기화 완료');
-        }
-
-        // 동적 필드 설정
-        function setupDynamicFields() {
             elements.addKeyIdeaBtn.addEventListener('click', addKeyIdeaField);
-            updateAddButtonState();
-        }
-
-        // 핵심 아이디어 필드 추가
-        function addKeyIdeaField() {
-            if (keyIdeaCounter >= MAX_KEY_IDEAS) {
-                announceToScreenReader('최대 8개까지만 추가할 수 있어요!', 'assertive');
-                return;
-            }
-
-            keyIdeaCounter++;
-            const fieldId = `keyIdea${keyIdeaCounter}`;
-            
-            // 재미있는 라벨들
-            const funLabels = [
-                '🎈 또 다른 재미있었던 것:',
-                '🌈 더 배우고 싶은 것:',
-                '⭐ 친구들에게 자랑하고 싶은 것:',
-                '🎯 가장 기억에 남는 것:',
-                '🚀 새롭게 알게 된 것:',
-                '💫 특별했던 것:'
-            ];
-            
-            const labelIndex = Math.min(keyIdeaCounter - 3, funLabels.length - 1);
-            const label = funLabels[labelIndex];
-            
-            // 새 필드 생성
-            const fieldGroup = document.createElement('div');
-            fieldGroup.className = 'input-group dynamic-input-group';
-            fieldGroup.setAttribute('data-field-id', keyIdeaCounter);
-            
-            fieldGroup.innerHTML = `
-                <label for="${fieldId}">${label}</label>
-                <input type="text" id="${fieldId}" placeholder="더 생각나는 것이 있다면 써보세요!" aria-describedby="${fieldId}-help">
-                <div id="${fieldId}-help" class="sr-only">${keyIdeaCounter}번째로 중요한 것을 써보세요</div>
-                <button type="button" class="remove-field-btn" aria-label="${keyIdeaCounter}번째 항목 삭제" onclick="removeKeyIdeaField(${keyIdeaCounter})">
-                    ×
-                </button>
-            `;
-            
-            // 컨테이너에 추가
-            elements.keyIdeasContainer.appendChild(fieldGroup);
-            
-            // 새 필드에 포커스
-            const newInput = fieldGroup.querySelector('input');
-            newInput.focus();
-            
-            // 이벤트 리스너 추가
-            newInput.addEventListener('input', updateFormValidity);
-            newInput.addEventListener('blur', validateField);
-            newInput.addEventListener('input', clearErrorState);
-            
-            updateAddButtonState();
-            updateFormValidity();
-            
-            announceToScreenReader(`${keyIdeaCounter}번째 항목이 추가되었어요!`);
-        }
-
-        // 핵심 아이디어 필드 제거
-        function removeKeyIdeaField(fieldId) {
-            const fieldGroup = document.querySelector(`[data-field-id="${fieldId}"]`);
-            if (!fieldGroup) return;
-            
-            // 애니메이션과 함께 제거
-            fieldGroup.classList.add('field-removing');
-            
-            setTimeout(() => {
-                if (fieldGroup.parentNode) {
-                    fieldGroup.parentNode.removeChild(fieldGroup);
-                    updateAddButtonState();
-                    updateFormValidity();
-                    announceToScreenReader(`${fieldId}번째 항목이 삭제되었어요!`);
-                }
-            }, 500);
-        }
-
-        // 추가 버튼 상태 업데이트
-        function updateAddButtonState() {
-            const currentFieldCount = elements.keyIdeasContainer.querySelectorAll('.input-group').length;
-            const dynamicFieldCount = elements.keyIdeasContainer.querySelectorAll('.dynamic-input-group').length;
-            
-            if (currentFieldCount >= MAX_KEY_IDEAS) {
-                elements.addKeyIdeaBtn.disabled = true;
-                elements.addKeyIdeaBtn.innerHTML = `<span>✓</span> 모두 ${MAX_KEY_IDEAS}개 완성! (${dynamicFieldCount + 2}/${MAX_KEY_IDEAS})`;
-                elements.addKeyIdeaBtn.setAttribute('aria-label', '최대 개수에 도달했어요');
-            } else {
-                elements.addKeyIdeaBtn.disabled = false;
-                elements.addKeyIdeaBtn.innerHTML = '<span>➕</span> 더 추가하기!';
-                elements.addKeyIdeaBtn.setAttribute('aria-label', `더 추가하기 (현재 ${dynamicFieldCount + 2}개)`);
-            }
-        }
-
-        // 모든 핵심 아이디어 필드 가져오기
-        function getAllKeyIdeaFields() {
-            const fields = [];
-            const inputs = elements.keyIdeasContainer.querySelectorAll('input[id^="keyIdea"]');
-            inputs.forEach(input => {
-                fields.push({
-                    id: input.id,
-                    value: input.value.trim(),
-                    element: input
-                });
-            });
-            return fields;
-        }
-
-        // 접근성 설정
-        function setupAccessibility() {
-            // 키보드 네비게이션
-            document.addEventListener('keydown', handleKeyboardNavigation);
-            
-            // ARIA live regions 설정
-            elements.loadingIndicator.setAttribute('aria-live', 'assertive');
-            elements.loadingIndicator.setAttribute('aria-atomic', 'true');
-            
-            // 폼 유효성 검사 실시간 피드백
-            const requiredFields = [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
-            
-            requiredFields.forEach(field => {
-                field.addEventListener('blur', validateField);
-                field.addEventListener('input', clearErrorState);
-            });
-        }
-
-        // 폼 유효성 검사 설정
-        function setupFormValidation() {
-            const requiredFields = [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
-            
-            requiredFields.forEach(field => {
-                field.addEventListener('input', updateFormValidity);
-            });
-        }
-
-        // 필드 유효성 검사
-        function validateField(event) {
-            const field = event.target;
-            const value = field.value.trim();
-            
-            if (field.hasAttribute('required') && !value) {
-                field.setAttribute('aria-invalid', 'true');
-                field.style.borderColor = 'var(--danger-color)';
-                field.style.background = '#ffebee';
-                announceToScreenReader(`${field.labels[0].textContent.replace(/\(.*\)/, '')} 이 칸은 꼭 써주세요!`);
-            } else {
-                field.setAttribute('aria-invalid', 'false');
-                field.style.borderColor = '';
-                field.style.background = '';
-            }
-        }
-
-        // 오류 상태 제거
-        function clearErrorState(event) {
-            const field = event.target;
-            if (field.value.trim()) {
-                field.setAttribute('aria-invalid', 'false');
-                field.style.borderColor = '';
-                field.style.background = '';
-            }
-        }
-
-        // 🔧 수정: 폼 유효성 업데이트 (전역 변수 동기화)
-        function updateFormValidity() {
-            const staticRequiredFields = [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
-            const isValid = staticRequiredFields.every(field => field.value.trim().length > 0);
-            
-            // 전역 변수 업데이트
-            window.isFormValid = isValid;
-            
-            // 버튼 상태 업데이트
-            elements.saveImageBtn.disabled = !isValid;
-            elements.savePdfBtn.disabled = !isValid;
-            
-            if (!isValid) {
-                elements.saveImageBtn.style.opacity = '0.6';
-                elements.savePdfBtn.style.opacity = '0.6';
-            } else {
-                elements.saveImageBtn.style.opacity = '1';
-                elements.savePdfBtn.style.opacity = '1';
-            }
-        }
-
-        // 키보드 네비게이션
-        function handleKeyboardNavigation(e) {
-            // Ctrl+S로 저장
-            if (e.ctrlKey && e.key === 's') {
-                e.preventDefault();
-                if (window.isFormValid) {
-                    saveAsPDF();
-                } else {
-                    announceToScreenReader('먼저 모든 빨간 별표 항목을 써주세요!');
-                }
-            }
-
-            // + 키로 필드 추가
-            if (e.key === '+' && e.target.closest('.key-ideas-container')) {
-                e.preventDefault();
-                addKeyIdeaField();
-            }
-        }
-
-        // 스크린 리더 알림
-        function announceToScreenReader(message, priority = 'polite') {
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', priority);
-            announcement.setAttribute('aria-atomic', 'true');
-            announcement.className = 'sr-only';
-            announcement.textContent = message;
-            document.body.appendChild(announcement);
-            
-            setTimeout(() => {
-                if (document.body.contains(announcement)) {
-                    document.body.removeChild(announcement);
-                }
-            }, 1500);
-        }
-
-        // 이벤트 리스너 설정
-        function setupEventListeners() {
-            elements.saveImageBtn.addEventListener('click', saveAsImage);
-            elements.savePdfBtn.addEventListener('click', saveAsPDF);
+            elements.saveImageBtn.addEventListener('click', () => openAuthorDialog('image'));
+            elements.savePdfBtn.addEventListener('click', () => openAuthorDialog('pdf'));
             elements.resetBtn.addEventListener('click', resetForm);
             elements.downloadBlankTemplateBtn.addEventListener('click', downloadBlankTemplate);
+
+            requiredFields().forEach((f) => f.addEventListener('input', clearErrorState));
+            elements.myHeadline.addEventListener('input', autoGrowHeadline);
+            window.addEventListener('resize', autoGrowHeadline);
+            elements.myHeadline.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.isComposing) e.preventDefault(); // 한 문장 칸: 줄바꿈 대신 자동 줄넘김
+            });
+
+            [elements.authorGrade, elements.authorClass, elements.authorNumber, elements.authorName]
+                .forEach((f) => f.addEventListener('input', updateAuthorPreview));
+            elements.authorCancelBtn.addEventListener('click', () => elements.dialog.close('cancel'));
+            elements.authorForm.addEventListener('submit', onAuthorSubmit);
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    openAuthorDialog('pdf');
+                }
+            });
+
+            updateAddButtonState();
+            autoGrowHeadline();
         }
 
-        // 로딩 표시
-        function showLoading(message = '멋진 작품을 만들고 있어요...') {
+        function autoGrowHeadline() {
+            const ta = elements.myHeadline;
+            ta.style.height = 'auto';
+            ta.style.height = ta.scrollHeight + 4 + 'px';
+        }
+
+        // ---------- 핵심 내용 칸 추가/삭제 ----------
+        function addKeyIdeaField() {
+            const count = elements.keyIdeasContainer.querySelectorAll('.input-group').length;
+            if (count >= MAX_KEY_IDEAS) return;
+            keyIdeaCounter++;
+            const fieldId = `keyIdea${keyIdeaCounter}`;
+            const label = ideaLabels[Math.min(count, ideaLabels.length - 1)];
+
+            const group = document.createElement('div');
+            group.className = 'input-group dynamic-input-group';
+            group.setAttribute('data-field-id', keyIdeaCounter);
+            group.innerHTML = `
+                <label for="${fieldId}">${label}</label>
+                <input type="text" id="${fieldId}" placeholder="더 생각나는 것이 있다면 써 보세요!">
+                <button type="button" class="remove-field-btn" aria-label="${label} 칸 삭제">×</button>
+            `;
+            group.querySelector('.remove-field-btn').addEventListener('click', () => removeKeyIdeaField(group));
+            elements.keyIdeasContainer.appendChild(group);
+            group.querySelector('input').focus();
+            updateAddButtonState();
+        }
+
+        function removeKeyIdeaField(group) {
+            group.classList.add('field-removing');
+            setTimeout(() => { group.remove(); updateAddButtonState(); }, 250);
+        }
+
+        function updateAddButtonState() {
+            const count = elements.keyIdeasContainer.querySelectorAll('.input-group').length;
+            const full = count >= MAX_KEY_IDEAS;
+            elements.addKeyIdeaBtn.disabled = full;
+            elements.addKeyIdeaBtn.textContent = full ? `모두 ${MAX_KEY_IDEAS}개를 채웠어요` : '＋ 더 추가하기';
+        }
+
+        function getAllKeyIdeas() {
+            return [...elements.keyIdeasContainer.querySelectorAll('.input-group')].map((g, i) => ({
+                label: (g.querySelector('label')?.childNodes[0]?.textContent || ideaLabels[i] || `${i + 1}`).trim(),
+                value: g.querySelector('input').value.trim()
+            }));
+        }
+
+        // ---------- 확인 ----------
+        function clearErrorState(e) {
+            if (e.target.value.trim()) e.target.setAttribute('aria-invalid', 'false');
+        }
+
+        function checkRequired() {
+            const missing = requiredFields().filter((f) => !f.value.trim());
+            requiredFields().forEach((f) => f.setAttribute('aria-invalid', missing.includes(f) ? 'true' : 'false'));
+            if (missing.length) {
+                missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => missing[0].focus({ preventScroll: true }), 300);
+                showToast(`아직 비어 있는 칸이 ${missing.length}개 있어요. 빨간 칸을 채워 주세요.`, true);
+                return false;
+            }
+            return true;
+        }
+
+        // ---------- 작성자 창 ----------
+        let pendingMode = 'image';
+
+        function openAuthorDialog(mode) {
+            if (!checkRequired()) return;
+            pendingMode = mode;
+            elements.authorConfirmBtn.textContent = mode === 'pdf' ? 'PDF로 저장하기' : '이미지로 저장하기';
+            updateAuthorPreview();
+            if (typeof elements.dialog.showModal === 'function') {
+                elements.dialog.showModal();
+                setTimeout(() => elements.authorGrade.focus(), 30);
+            } else {
+                runSave(mode); // 아주 오래된 브라우저: 작성자 칸 없이 저장
+            }
+        }
+
+        function getAuthor() {
+            const g = elements.authorGrade.value.trim();
+            const c = elements.authorClass.value.trim();
+            const n = elements.authorNumber.value.trim();
+            const name = elements.authorName.value.trim();
+            const parts = [];
+            if (g) parts.push(/^\d+$/.test(g) ? `${g}학년` : g);
+            if (c) parts.push(/^\d+$/.test(c) ? `${c}반` : c);
+            if (n) parts.push(/^\d+$/.test(n) ? `${n}번` : n);
+            if (name) parts.push(name);
+            return { text: parts.join(' '), fileTag: [g && c ? `${g}-${c}` : (g || c), n, name].filter(Boolean).join('_') };
+        }
+
+        function updateAuthorPreview() {
+            const a = getAuthor();
+            elements.authorPreview.innerHTML = a.text
+                ? `결과물에 이렇게 들어가요: <b>${escapeHtml(a.text)}</b>`
+                : '아무것도 적지 않으면 작성자 없이 저장돼요.';
+        }
+
+        function onAuthorSubmit(e) {
+            e.preventDefault();
+            elements.dialog.close('ok');
+            runSave(pendingMode);
+        }
+
+        function runSave(mode) {
+            return mode === 'pdf' ? saveAsPDF() : saveAsImage();
+        }
+
+        // ---------- 안내 ----------
+        let toastTimer;
+        function showToast(message, isError = false) {
+            const t = elements.toast;
+            t.textContent = message;
+            t.classList.toggle('error', isError);
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), isError ? 4000 : 5000);
+        }
+
+        function showLoading(message) {
+            elements.loadingIndicator.querySelector('p').innerHTML = `<strong>${message}</strong><br>조금만 기다려 주세요`;
             elements.loadingIndicator.style.display = 'flex';
             elements.loadingIndicator.setAttribute('aria-hidden', 'false');
-            elements.loadingIndicator.querySelector('p').innerHTML = `<strong>${message}</strong><br>조금만 기다려주세요 😊`;
-            
-            // 모든 상호작용 요소 비활성화
-            const interactiveElements = document.querySelectorAll('button, input, textarea, [tabindex]');
-            interactiveElements.forEach(el => {
-                el.setAttribute('data-was-disabled', el.disabled || el.hasAttribute('disabled'));
-                el.disabled = true;
-            });
         }
-
         function hideLoading() {
             elements.loadingIndicator.style.display = 'none';
             elements.loadingIndicator.setAttribute('aria-hidden', 'true');
-            
-            // 상호작용 요소 복원
-            const interactiveElements = document.querySelectorAll('button, input, textarea, [tabindex]');
-            interactiveElements.forEach(el => {
-                if (el.getAttribute('data-was-disabled') !== 'true') {
-                    el.disabled = false;
-                }
-                el.removeAttribute('data-was-disabled');
-            });
-            
-            updateFormValidity();
-            updateAddButtonState();
         }
 
-        // 이미지로 저장
-        async function saveAsImage() {
-            if (!window.isFormValid) {
-                announceToScreenReader('빨간 별표가 있는 항목들을 모두 써주세요!', 'assertive');
-                return;
-            }
+        // ---------- 공통 도우미 ----------
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+        }
+        const nl2br = (s) => escapeHtml(s).replace(/\n/g, '<br>');
 
+        function getDateParts() {
+            const d = new Date();
+            const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+            return {
+                iso: `${y}-${String(m).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
+                ko: `${y}년 ${m}월 ${day}일`
+            };
+        }
+
+        function makeFilename(ext) {
+            const tag = getAuthor().fileTag.replace(/[^0-9A-Za-z가-힣_-]/g, '');
+            return `한줄요약_${tag ? tag + '_' : ''}${getDateParts().iso}.${ext}`;
+        }
+
+        async function renderToCanvas(node) {
+            document.body.appendChild(node);
             try {
-                showLoading('멋진 사진을 만들고 있어요...');
-                announceToScreenReader('사진을 만들고 있어요!');
-                
-                const printDiv = createPrintableContent();
-                document.body.appendChild(printDiv);
-                
-                const canvas = await html2canvas(printDiv, {
-                    backgroundColor: '#ffffff',
+                if (document.fonts && document.fonts.ready) await document.fonts.ready;
+                await new Promise((r) => setTimeout(r, 60));
+                const canvas = await html2canvas(node, {
+                    backgroundColor: '#f7f5f1',
                     scale: 2,
                     useCORS: true,
-                    allowTaint: true,
-                    width: printDiv.offsetWidth,
-                    height: printDiv.offsetHeight,
-                    logging: false
+                    logging: false,
+                    width: node.offsetWidth,
+                    height: node.offsetHeight,
+                    windowWidth: node.offsetWidth + 40
                 });
-                
-                document.body.removeChild(printDiv);
-                
-                const link = document.createElement('a');
-                const filename = `나의_한줄요약_${getCurrentDateString()}.png`;
-                link.download = filename;
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-                
-                announceToScreenReader('와! 멋진 사진이 저장되었어요! 🎉');
-            } catch (error) {
-                console.error('이미지 저장 실패:', error);
-                announceToScreenReader('앗! 사진 저장에 실패했어요. 다시 해보세요.', 'assertive');
+                // 쪽 나눔에 쓸 덩어리 경계(px, 배율 반영)
+                const top = node.getBoundingClientRect().top;
+                const breaks = [...node.querySelectorAll('[data-block]')].map((b) => Math.round((b.getBoundingClientRect().bottom - top) * 2));
+                return { canvas, breaks };
             } finally {
-                hideLoading();
+                node.remove();
             }
         }
 
-        // PDF로 저장
-        async function saveAsPDF() {
-            if (!window.isFormValid) {
-                announceToScreenReader('빨간 별표가 있는 항목들을 모두 써주세요!', 'assertive');
-                return;
-            }
+        // ---------- 결과 카드 ----------
+        function createResultCard(width) {
+            const author = getAuthor().text;
+            const date = getDateParts().ko;
+            const ideas = getAllKeyIdeas().filter((i) => i.value);
+            const wrap = document.createElement('div');
+            wrap.style.cssText = `position:absolute; left:-10000px; top:0; width:${width}px; padding:44px; background:#f7f5f1; font-family:${FONT}; color:#1f2433; word-break:keep-all; line-height:1.6;`;
 
-            try {
-                showLoading('멋진 PDF를 만들고 있어요...');
-                announceToScreenReader('PDF를 만들고 있어요!');
-                
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                pdf.setFont('helvetica');
-                
-                let yPosition = 25;
-                const lineHeight = 8;
-                const leftMargin = 20;
-                const rightMargin = 190;
-                const maxWidth = rightMargin - leftMargin;
-                
-                // 제목 (더 예쁘게)
-                pdf.setFontSize(22);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('✨ 나만의 한 줄 요약 ✨', 105, yPosition, { align: 'center' });
-                
-                // 구분선
-                pdf.setLineWidth(1);
-                pdf.line(leftMargin, yPosition + 5, rightMargin, yPosition + 5);
-                yPosition += 20;
-                
-                // 날짜와 이름
-                pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text(`📅 날짜: ${getCurrentDateString()}`, leftMargin, yPosition);
-                pdf.text('✏️ 이름: _______________', rightMargin - 60, yPosition);
-                yPosition += 15;
-                
-                // 주제
-                pdf.setFontSize(14);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('📚 오늘 배운 것', leftMargin, yPosition);
-                yPosition += 8;
-                pdf.setFont('helvetica', 'normal');
-                pdf.setFontSize(12);
-                const topicText = elements.topicInput.value || '(입력되지 않음)';
-                const topicLines = pdf.splitTextToSize(topicText, maxWidth - 10);
-                pdf.text(topicLines, leftMargin + 5, yPosition);
-                yPosition += (topicLines.length * lineHeight) + 12;
-                
-                // 1단계 - 모든 핵심 아이디어
-                pdf.setFontSize(14);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('🔍 1단계: 중요한 것들', leftMargin, yPosition);
-                yPosition += 10;
-                
-                pdf.setFont('helvetica', 'normal');
-                pdf.setFontSize(11);
-                const allKeyIdeas = getAllKeyIdeaFields();
-                
-                const ideaLabels = [
-                    '🌟 가장 중요하게 배운 것:',
-                    '✨ 가장 신기했던 것:',
-                    '🎈 또 다른 재미있었던 것:',
-                    '🌈 더 배우고 싶은 것:',
-                    '⭐ 친구들에게 자랑하고 싶은 것:',
-                    '🎯 가장 기억에 남는 것:',
-                    '🚀 새롭게 알게 된 것:',
-                    '💫 특별했던 것:'
-                ];
-                
-                allKeyIdeas.forEach((idea, index) => {
-                    const ideaText = idea.value || '(입력되지 않음)';
-                    const label = ideaLabels[index] || `${index + 1}.`;
-                    
-                    pdf.setFont('helvetica', 'bold');
-                    pdf.text(label, leftMargin + 5, yPosition);
-                    yPosition += 6;
-                    pdf.setFont('helvetica', 'normal');
-                    const ideaLines = pdf.splitTextToSize(ideaText, maxWidth - 15);
-                    pdf.text(ideaLines, leftMargin + 10, yPosition);
-                    yPosition += (ideaLines.length * lineHeight) + 5;
-                });
-                
-                yPosition += 8;
-                
-                // 2단계 - 한 줄 요약 (특별하게 강조)
-                pdf.setFontSize(14);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('✍️ 2단계: 나만의 한 줄 요약', leftMargin, yPosition);
-                yPosition += 10;
-                
-                // 한 줄 요약 박스
-                const headlineText = elements.myHeadline.value || '(입력되지 않음)';
-                pdf.setFillColor(255, 248, 220);
-                pdf.rect(leftMargin, yPosition - 5, maxWidth, 20, 'F');
-                pdf.setLineWidth(2);
-                pdf.rect(leftMargin, yPosition - 5, maxWidth, 20);
-                
-                pdf.setFontSize(15);
-                pdf.setFont('helvetica', 'bold');
-                const headlineLines = pdf.splitTextToSize(`"${headlineText}"`, maxWidth - 10);
-                pdf.text(headlineLines, 105, yPosition + 5, { align: 'center' });
-                pdf.setFontSize(11);
-                yPosition += 25;
-                
-                // 3단계
-                pdf.setFontSize(14);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('💭 3단계: 내 생각 나누기', leftMargin, yPosition);
-                yPosition += 10;
-                
-                pdf.setFont('helvetica', 'normal');
-                pdf.setFontSize(11);
-                
-                // 선택 이유
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('🤔 왜 이 문장을 선택했나요?', leftMargin + 5, yPosition);
-                yPosition += 6;
-                pdf.setFont('helvetica', 'normal');
-                const reasonText = elements.reason.value || '(입력되지 않음)';
-                const reasonLines = pdf.splitTextToSize(reasonText, maxWidth - 10);
-                pdf.text(reasonLines, leftMargin + 5, yPosition);
-                yPosition += (reasonLines.length * lineHeight) + 10;
-                
-                // 전달하고 싶은 메시지
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('👫 친구들이 무엇을 알게 되었으면 좋겠나요?', leftMargin + 5, yPosition);
-                yPosition += 6;
-                pdf.setFont('helvetica', 'normal');
-                const audienceText = elements.audienceMessage.value || '(입력되지 않음)';
-                const audienceLines = pdf.splitTextToSize(audienceText, maxWidth - 10);
-                pdf.text(audienceLines, leftMargin + 5, yPosition);
-                
-                // 하단 장식
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'italic');
-                pdf.text('🌟 멋진 한 줄 요약을 만들어주어서 고마워요! 🌟', 105, 285, { align: 'center' });
-                
-                const filename = `나의_한줄요약_${getCurrentDateString()}.pdf`;
-                pdf.save(filename);
-                announceToScreenReader('와! 멋진 PDF가 저장되었어요! 🎉');
-            } catch (error) {
-                console.error('PDF 저장 실패:', error);
-                announceToScreenReader('앗! PDF 저장에 실패했어요. 다시 해보세요.', 'assertive');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        // 🔧 수정: 출력용 콘텐츠 생성 (배경색 문제 해결)
-        function createPrintableContent() {
-            const printDiv = document.createElement('div');
-            printDiv.style.cssText = `
-                width: 800px;
-                padding: 40px;
-                background: white;
-                font-family: 'Comic Sans MS', 'Malgun Gothic', '맑은 고딕', cursive, sans-serif;
-                color: #333;
-                line-height: 1.6;
-                position: absolute;
-                left: -9999px;
-                top: 0;
-                border-radius: 20px;
-                border: 3px solid #667eea;
-            `;
-            
-            // 모든 핵심 아이디어 수집
-            const allKeyIdeas = getAllKeyIdeaFields();
-            const ideaLabels = [
-                '🌟 가장 중요하게 배운 것:',
-                '✨ 가장 신기했던 것:',
-                '🎈 또 다른 재미있었던 것:',
-                '🌈 더 배우고 싶은 것:',
-                '⭐ 친구들에게 자랑하고 싶은 것:',
-                '🎯 가장 기억에 남는 것:',
-                '🚀 새롭게 알게 된 것:',
-                '💫 특별했던 것:'
-            ];
-            
-            const keyIdeasHtml = allKeyIdeas.map((idea, index) => {
-                const label = ideaLabels[index] || `${index + 1}.`;
-                return `<p style="margin: 0 0 10px 0; padding: 10px; background: #f8f9fa; border-radius: 10px; border: 2px solid #e9ecef;"><strong style="color: #495057;">${label}</strong><br><span style="color: #212529;">${idea.value || '(입력되지 않음)'}</span></p>`;
-            }).join('');
-            
-            printDiv.innerHTML = `
-                <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #667eea;">
-                    <h1 style="margin: 0; font-size: 28px; color: #667eea; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">✨ 나만의 한 줄 요약 ✨</h1>
-                    <p style="margin: 10px 0 0 0; font-size: 16px; color: #666;">📅 ${getCurrentDateString()}</p>
-                </div>
-                
-                <div style="margin-bottom: 25px; padding: 20px; background: #e8f5e8; border-radius: 15px; border: 2px solid #4ecdc4;">
-                    <h3 style="color: #2d5a2d; margin-bottom: 10px; font-size: 18px;">📚 오늘 배운 것</h3>
-                    <div style="padding: 15px; background: white; border-radius: 10px; font-size: 16px; font-weight: bold; color: #333; border: 2px solid #4ecdc4;">
-                        ${elements.topicInput.value || '(입력되지 않음)'}
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 25px; padding: 20px; background: #f1f8e9; border-radius: 15px; border: 2px solid #4ecdc4;">
-                    <h3 style="color: #2d5a2d; margin-bottom: 15px; font-size: 18px;">🔍 1단계: 중요한 것들</h3>
+            const ideaHtml = ideas.map((i, idx) => `
+                <div data-block style="display:flex; gap:14px; padding:14px 0; border-top:${idx ? '1px solid #eeeae3' : 'none'};">
+                    <div style="flex:0 0 30px; height:30px; border-radius:50%; background:#ece9fb; color:#3f31b0; font-weight:700; font-size:16px; line-height:30px; text-align:center;">${idx + 1}</div>
                     <div>
-                        ${keyIdeasHtml}
+                        <div style="font-size:15px; font-weight:600; color:#5d6477; line-height:1.4;">${escapeHtml(i.label)}</div>
+                        <div style="font-size:21px; margin-top:2px;">${nl2br(i.value)}</div>
                     </div>
-                </div>
-                
-                <div style="margin-bottom: 25px; padding: 25px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 15px; text-align: center;">
-                    <h3 style="color: #856404; margin-bottom: 15px; font-size: 18px;">✍️ 2단계: 나만의 한 줄 요약</h3>
-                    <div style="padding: 20px; background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%); color: white; border-radius: 10px; font-size: 20px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-                        "${elements.myHeadline.value || '(입력되지 않음)'}"
+                </div>`).join('');
+
+            wrap.innerHTML = `
+                <div style="background:#ffffff; border:1px solid #e7e2da; border-radius:22px; padding:44px 48px 40px;">
+                    <div data-block style="display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:15px; color:#5d6477; padding-bottom:16px; border-bottom:3px solid #1f2433;">
+                        <span style="font-weight:700; color:#3f31b0; letter-spacing:0.02em;">나만의 한 줄 요약 · HEADLINES</span>
+                        <span>${date}</span>
                     </div>
-                </div>
-                
-                <div style="padding: 20px; background: #f8d7da; border: 2px solid #dc3545; border-radius: 15px;">
-                    <h3 style="color: #721c24; margin-bottom: 15px; font-size: 18px;">💭 3단계: 내 생각 나누기</h3>
-                    <div style="margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px; border: 1px solid #dc3545;">
-                        <p style="margin: 0 0 10px 0; font-weight: bold; color: #721c24;">🤔 선택한 이유:</p>
-                        <p style="margin: 0; color: #333;">${elements.reason.value || '(입력되지 않음)'}</p>
+                    <div data-block style="padding-top:22px;">
+                        ${author ? `<div style="font-size:18px; font-weight:700; color:#1f2433; margin-bottom:6px;">${escapeHtml(author)}</div>` : ''}
+                        <div style="font-size:17px; color:#5d6477;">오늘 배운 것 <span style="color:#1f2433; font-weight:600; margin-left:8px;">${escapeHtml(elements.topicInput.value.trim())}</span></div>
                     </div>
-                    <div style="padding: 15px; background: white; border-radius: 10px; border: 1px solid #dc3545;">
-                        <p style="margin: 0 0 10px 0; font-weight: bold; color: #721c24;">👫 친구들이 알게 되었으면 하는 것:</p>
-                        <p style="margin: 0; color: #333;">${elements.audienceMessage.value || '(입력되지 않음)'}</p>
+                    <div data-block style="padding:26px 0 30px; border-bottom:1px solid #e7e2da;">
+                        <div style="font-size:${headlineSize(elements.myHeadline.value.trim())}px; font-weight:800; line-height:1.3; letter-spacing:-0.01em; color:#1f2433;">${escapeHtml(elements.myHeadline.value.trim())}</div>
                     </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #667eea;">
-                    <p style="margin: 0; font-size: 14px; color: #667eea; font-weight: bold;">🌟 멋진 한 줄 요약을 완성했어요! 🌟</p>
-                </div>
-            `;
-            
-            return printDiv;
+                    <div style="padding-top:26px;">
+                        <div style="font-size:17px; font-weight:700; color:#3f31b0; margin-bottom:6px;">중요한 것들</div>
+                        ${ideaHtml}
+                    </div>
+                    <div data-block style="margin-top:24px; padding:20px 22px; background:#f7f5f1; border-radius:16px;">
+                        <div style="font-size:15px; font-weight:600; color:#5d6477;">왜 이 문장을 선택했나요?</div>
+                        <div style="font-size:20px; margin-top:4px;">${nl2br(elements.reason.value.trim())}</div>
+                    </div>
+                    <div data-block style="margin-top:14px; padding:20px 22px; background:#f7f5f1; border-radius:16px;">
+                        <div style="font-size:15px; font-weight:600; color:#5d6477;">친구들이 무엇을 알게 되었으면 좋겠나요?</div>
+                        <div style="font-size:20px; margin-top:4px;">${nl2br(elements.audienceMessage.value.trim())}</div>
+                    </div>
+                </div>`;
+            return wrap;
         }
 
-        // 빈 템플릿 다운로드 (HTML→이미지→PDF 방식으로 한글 문제 해결)
+        function headlineSize(text) {
+            const len = text.length;
+            if (len <= 22) return 50;
+            if (len <= 40) return 42;
+            if (len <= 70) return 36;
+            return 30;
+        }
+
+        // ---------- 이미지로 저장 ----------
+        async function saveAsImage() {
+            try {
+                showLoading('이미지를 만들고 있어요');
+                const { canvas } = await renderToCanvas(createResultCard(1080));
+                const filename = makeFilename('png');
+                const blob = await new Promise((r) => canvas.toBlob(r, 'image/png'));
+                downloadBlob(blob, filename);
+                showToast(`'${filename}' 파일을 내려받았어요. 다운로드 폴더에서 확인해요.`);
+            } catch (err) {
+                console.error('이미지 저장 실패:', err);
+                showToast('이미지를 만들지 못했어요. 한 번 더 눌러 주세요.', true);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 4000);
+        }
+
+        // ---------- PDF로 저장 (한글이 깨지지 않도록 그림으로 넣음) ----------
+        async function saveAsPDF() {
+            try {
+                showLoading('PDF를 만들고 있어요');
+                const { canvas, breaks } = await renderToCanvas(createResultCard(820));
+                const pdf = canvasToA4Pdf(canvas, breaks);
+                const filename = makeFilename('pdf');
+                pdf.save(filename);
+                showToast(`'${filename}' 파일을 내려받았어요. 다운로드 폴더에서 확인해요.`);
+            } catch (err) {
+                console.error('PDF 저장 실패:', err);
+                showToast('PDF를 만들지 못했어요. 한 번 더 눌러 주세요.', true);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // 긴 결과물은 덩어리 경계에서 잘라 여러 쪽으로 나눈다
+        function canvasToA4Pdf(canvas, breaks) {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageW = 210, pageH = 297;
+            const pxPerMm = canvas.width / pageW;
+            const pagePx = Math.floor(pageH * pxPerMm);
+            let start = 0, first = true;
+
+            while (start < canvas.height - 2) {
+                let end = Math.min(start + pagePx - (first ? 0 : 60), canvas.height);
+                if (end < canvas.height) {
+                    const fit = breaks.filter((b) => b > start + 40 && b <= end);
+                    if (fit.length) end = fit[fit.length - 1] + 20;
+                }
+                const topPad = first ? 0 : 60; // 이어지는 쪽은 위에 여백
+                const slice = document.createElement('canvas');
+                slice.width = canvas.width;
+                slice.height = end - start + topPad;
+                const ctx = slice.getContext('2d');
+                ctx.fillStyle = '#f7f5f1';
+                ctx.fillRect(0, 0, slice.width, slice.height);
+                ctx.drawImage(canvas, 0, start, canvas.width, end - start, 0, topPad, canvas.width, end - start);
+
+                if (!first) pdf.addPage();
+                pdf.setFillColor(247, 245, 241);
+                pdf.rect(0, 0, pageW, pageH, 'F');
+                pdf.addImage(slice.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pageW, slice.height / pxPerMm);
+                first = false;
+                start = end;
+            }
+            return pdf;
+        }
+
+        // ---------- 빈 학습지 ----------
         async function downloadBlankTemplate() {
             try {
-                showLoading('빈 학습지를 만들고 있어요...');
-                announceToScreenReader('빈 학습지를 만들고 있어요!');
-                
-                // HTML 기반 빈 템플릿 생성
-                const blankTemplate = createBlankTemplateHTML();
-                document.body.appendChild(blankTemplate);
-                
-                // HTML을 이미지로 변환
-                const canvas = await html2canvas(blankTemplate, {
-                    backgroundColor: '#ffffff',
-                    scale: 2,
-                    useCORS: true,
-                    allowTaint: true,
-                    width: blankTemplate.offsetWidth,
-                    height: blankTemplate.offsetHeight,
-                    logging: false
-                });
-                
-                // 이미지를 PDF에 추가
+                showLoading('빈 학습지를 만들고 있어요');
+                const { canvas } = await renderToCanvas(createBlankTemplateHTML());
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                const imgData = canvas.toDataURL('image/png');
-                const imgWidth = 210; // A4 width in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                
-                // HTML 요소 제거
-                document.body.removeChild(blankTemplate);
-                
-                const filename = `빈_한줄요약_학습지_${getCurrentDateString()}.pdf`;
+                pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297);
+                const filename = `빈_한줄요약_학습지.pdf`;
                 pdf.save(filename);
-                announceToScreenReader('빈 학습지가 저장되었어요!');
-            } catch (error) {
-                console.error('빈 템플릿 다운로드 실패:', error);
-                announceToScreenReader('빈 학습지 다운로드에 실패했어요. 다시 해보세요.', 'assertive');
+                showToast(`'${filename}' 파일을 내려받았어요.`);
+            } catch (err) {
+                console.error('빈 학습지 실패:', err);
+                showToast('빈 학습지를 만들지 못했어요. 한 번 더 눌러 주세요.', true);
             } finally {
                 hideLoading();
             }
         }
 
-        // 빈 템플릿 HTML 생성 함수 (A4 1페이지 풀사이즈 최적화)
         function createBlankTemplateHTML() {
-            const templateDiv = document.createElement('div');
-            templateDiv.style.cssText = `
-                width: 800px;
-                padding: 20px;
-                background: white;
-                font-family: 'Comic Sans MS', 'Malgun Gothic', '맑은 고딕', cursive, sans-serif;
-                color: #333;
-                line-height: 1.4;
-                position: absolute;
-                left: -9999px;
-                top: 0;
-                height: 1120px;
-                overflow: hidden;
-            `;
-            
-            templateDiv.innerHTML = `
-                <div style="text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #ff6b6b;">
-                    <h1 style="margin: 0; font-size: 22px; color: #ff6b6b; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">✨ 나만의 한 줄 요약 만들기 ✨</h1>
-                    <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">🎯 오늘 배운 것을 친구들에게 알려주는 멋진 한 문장을 만들어보자!</p>
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <div style="font-size: 14px;">📅 날짜: ________________</div>
-                        <div style="font-size: 14px;">✏️ 이름: ________________</div>
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 15px; padding: 15px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 10px; border: 2px solid #4ecdc4;">
-                    <h3 style="color: #2d5a2d; margin: 0 0 10px 0; font-size: 16px;">📚 오늘 무엇을 배웠나요?</h3>
-                    <div style="border: 2px solid #4ecdc4; border-radius: 8px; height: 35px; background: white;">
-                        &nbsp;
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 15px; padding: 15px; background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%); border-radius: 10px; border: 2px solid #4ecdc4;">
-                    <h3 style="color: #2d5a2d; margin: 0 0 12px 0; font-size: 16px;">🔍 1단계: 중요한 것들 찾아보기</h3>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-weight: bold; color: #2d5a2d; font-size: 13px; display: block; margin-bottom: 4px;">🌟 가장 중요하게 배운 것:</label>
-                        <div style="border: 1px solid #4ecdc4; border-radius: 6px; height: 30px; background: white;">
-                            &nbsp;
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-weight: bold; color: #2d5a2d; font-size: 13px; display: block; margin-bottom: 4px;">✨ 가장 신기했던 것:</label>
-                        <div style="border: 1px solid #4ecdc4; border-radius: 6px; height: 30px; background: white;">
-                            &nbsp;
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-weight: bold; color: #2d5a2d; font-size: 13px; display: block; margin-bottom: 4px;">🎈 더 중요한 것 1:</label>
-                        <div style="border: 1px solid #4ecdc4; border-radius: 6px; height: 30px; background: white;">
-                            &nbsp;
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-weight: bold; color: #2d5a2d; font-size: 13px; display: block; margin-bottom: 4px;">🌈 더 중요한 것 2:</label>
-                        <div style="border: 1px solid #4ecdc4; border-radius: 6px; height: 30px; background: white;">
-                            &nbsp;
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 0;">
-                        <label style="font-weight: bold; color: #2d5a2d; font-size: 13px; display: block; margin-bottom: 4px;">⭐ 더 중요한 것 3:</label>
-                        <div style="border: 1px solid #4ecdc4; border-radius: 6px; height: 30px; background: white;">
-                            &nbsp;
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 15px; padding: 15px; background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); border-radius: 10px; border: 2px solid #ff6b6b;">
-                    <h3 style="color: #b33939; margin: 0 0 10px 0; font-size: 16px;">✍️ 2단계: 멋진 한 줄 요약 만들기</h3>
-                    <label style="font-weight: bold; color: #b33939; font-size: 13px; display: block; margin-bottom: 6px;">🎤 친구들에게 알려주고 싶은 한 문장:</label>
-                    <div style="border: 2px solid #ff6b6b; border-radius: 10px; height: 45px; background: linear-gradient(135deg, #e74c3c 0%, #2980b9 100%); text-align: center; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;">
-                        &nbsp;
-                    </div>
-                    
-                    <div style="margin-top: 10px; background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white; padding: 10px; border-radius: 6px; font-size: 11px; border: 1px solid #0984e3;">
-                        <strong>💡 팁!</strong> ✓ 짧고 쉽게 ✓ 가장 중요한 것을 ✓ 친구들이 "와~" 할 수 있게
-                    </div>
-                </div>
-                
-                <div style="padding: 15px; background: linear-gradient(135deg, #e17055 0%, #d63031 100%); border-radius: 10px; border: 2px solid #9c27b0; color: white;">
-                    <h3 style="color: white; margin: 0 0 12px 0; font-size: 16px;">💭 3단계: 왜 이렇게 썼는지 말해보기</h3>
-                    
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-weight: bold; color: white; font-size: 13px; display: block; margin-bottom: 4px;">🤔 왜 이 문장을 선택했나요?</label>
-                        <div style="border: 1px solid white; border-radius: 6px; height: 50px; background: rgba(255,255,255,0.9);">
-                            &nbsp;
-                        </div>
-                    </div>
-                    
+            const box = (h) => `<div style="height:${h}px; border:1.5px solid #c9cdd6; border-radius:10px; background:#fff;"></div>`;
+            const field = (label, h, last) => `
+                <div style="margin-bottom:${last ? 0 : 9}px;">
+                    <div style="font-size:14px; font-weight:600; margin-bottom:4px;">${label}</div>${box(h)}
+                </div>`;
+            const step = (n, title, inner) => `
+                <div style="border:1px solid #e7e2da; border-radius:16px; padding:13px 18px; margin-bottom:11px;">
+                    <div style="display:flex; align-items:center; gap:10px; font-size:17px; font-weight:700; margin-bottom:9px;">
+                        <span style="width:28px; height:28px; border-radius:50%; background:#5b4bd6; color:#fff; font-size:15px; line-height:28px; text-align:center; display:inline-block;">${n}</span>${title}
+                    </div>${inner}
+                </div>`;
+            const line = (w) => `<span style="display:inline-block; width:${w}px; border-bottom:1.5px solid #1f2433; height:20px; vertical-align:bottom;"></span>`;
+
+            const div = document.createElement('div');
+            div.style.cssText = `position:absolute; left:-10000px; top:0; width:794px; height:1123px; padding:36px 44px; background:#fff; font-family:${FONT}; color:#1f2433; word-break:keep-all; line-height:1.5; overflow:hidden;`;
+            div.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:12px; border-bottom:3px solid #1f2433; margin-bottom:14px;">
                     <div>
-                        <label style="font-weight: bold; color: white; font-size: 13px; display: block; margin-bottom: 4px;">👫 친구들이 무엇을 알게 되었으면 좋겠나요?</label>
-                        <div style="border: 1px solid white; border-radius: 6px; height: 50px; background: rgba(255,255,255,0.9);">
-                            &nbsp;
-                        </div>
+                        <div style="font-size:13px; font-weight:700; color:#3f31b0;">HEADLINES · 종합·체계화</div>
+                        <div style="font-size:26px; font-weight:800;">나만의 한 줄 요약 만들기</div>
                     </div>
+                    <div style="font-size:14px; color:#5d6477;">날짜 ${line(110)}</div>
                 </div>
-                
-                <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
-                    <p style="margin: 0; font-size: 12px; color: #666; font-style: italic;">🌟 멋진 한 줄 요약을 만들어보자! 🌟</p>
+                <div style="font-size:15px; margin-bottom:16px;">
+                    ${line(44)} 학년 &nbsp; ${line(44)} 반 &nbsp; ${line(44)} 번 &nbsp;&nbsp; 이름 ${line(150)}
                 </div>
+                <div style="font-size:14px; color:#5d6477; margin-bottom:14px;">오늘 배운 것 중에서 중요하고 재미있었던 것들을 찾아서, 친구들에게 꼭 알려 주고 싶은 멋진 한 문장을 만들어 보자.</div>
+                ${field('오늘 무엇을 배웠나요?', 38)}
+                <div style="height:6px;"></div>
+                ${step(1, '중요한 것들 찾아보기',
+                    field('가장 중요하게 배운 것', 32) + field('가장 신기했던 것', 32) + field('더 중요한 것', 32) + field('더 중요한 것', 32, true))}
+                ${step(2, '멋진 한 줄 요약 만들기',
+                    `<div style="font-size:15px; font-weight:600; margin-bottom:5px;">친구들에게 알려 주고 싶은 한 문장</div>
+                     <div style="height:64px; border:2px solid #5b4bd6; border-radius:10px;"></div>
+                     <div style="font-size:13px; color:#5d6477; margin-top:8px;">팁 · 짧고 쉽게 · 가장 중요한 것을 넣어서 · 친구들이 "와~" 할 수 있게</div>`)}
+                ${step(3, '왜 이렇게 썼는지 말해 보기',
+                    field('왜 이 문장을 선택했나요?', 62) + field('친구들이 무엇을 알게 되었으면 좋겠나요?', 62, true))}
             `;
-            
-            return templateDiv;
+            return div;
         }
 
-        // 폼 리셋
+        // ---------- 다시 만들기 ----------
         function resetForm() {
-            if (confirm('모든 내용이 사라져요. 정말 다시 만들까요? 🤔')) {
-                // 정적 필드 초기화
-                elements.topicInput.value = '';
-                elements.keyIdea1.value = '';
-                elements.keyIdea2.value = '';
-                elements.myHeadline.value = '';
-                elements.reason.value = '';
-                elements.audienceMessage.value = '';
-                
-                // 동적 필드 모두 제거
-                const dynamicFields = elements.keyIdeasContainer.querySelectorAll('.dynamic-input-group');
-                dynamicFields.forEach(field => {
-                    field.remove();
-                });
-                
-                // 카운터 초기화
-                keyIdeaCounter = 2;
-                
-                // 오류 상태 제거
-                const allFields = [elements.topicInput, elements.keyIdea1, elements.keyIdea2, elements.myHeadline, elements.reason, elements.audienceMessage];
-                allFields.forEach(field => {
-                    field.setAttribute('aria-invalid', 'false');
-                    field.style.borderColor = '';
-                    field.style.background = '';
-                });
-                
-                updateFormValidity();
-                updateAddButtonState();
-                elements.topicInput.focus();
-                announceToScreenReader('모든 내용이 초기화되었어요! 다시 시작해보자! 🚀');
-            }
+            if (!confirm('쓴 내용이 모두 지워져요. 정말 다시 만들까요?')) return;
+            requiredFields().forEach((f) => { f.value = ''; f.setAttribute('aria-invalid', 'false'); });
+            elements.keyIdeasContainer.querySelectorAll('.dynamic-input-group').forEach((g) => g.remove());
+            keyIdeaCounter = 2;
+            updateAddButtonState();
+            autoGrowHeadline();
+            elements.topicInput.focus();
+            showToast('모두 지웠어요. 처음부터 다시 써 보자!');
         }
 
-        // 현재 날짜 문자열 반환
-        function getCurrentDateString() {
-            const now = new Date();
-            return now.toISOString().split('T')[0];
-        }
-
-        // 전역 함수로 노출
-        window.removeKeyIdeaField = removeKeyIdeaField;
-
-        // 초기화 실행
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
